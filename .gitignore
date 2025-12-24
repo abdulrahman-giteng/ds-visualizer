@@ -18,4 +18,5 @@ venv/
 
 # OS files
 .DS_Store
-Thumbs.db
+Thumbs.dbtest_list
+test_list
