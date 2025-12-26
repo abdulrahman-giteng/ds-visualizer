@@ -9,7 +9,7 @@
 
 typedef struct node
 {
-    int value;
+    void *data;
     struct node *next;
 } node_t;
 
@@ -29,9 +29,9 @@ list_t *list_create(void);
 void list_destroy(list_t *list);
 
 // Operations
-void list_push_front(list_t *list, int value);
-void list_push_back(list_t *list, int value);
-int list_pop_front(list_t *list, int *out_value);
+void list_push_front(list_t *list, void *data);
+void list_push_back(list_t *list, void *data);
+int list_pop_front(list_t *list, void **out_data);
 
 // Accessors (for visualization)
 size_t list_size(const list_t *list);
