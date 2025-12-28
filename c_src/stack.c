@@ -22,16 +22,16 @@ void stack_destroy(stack_t *stack)
     free(stack);
 }
 
-void stack_push(stack_t *stack, int value)
+void stack_push(stack_t *stack, void *data)
 {
     assert(stack != NULL);
-    list_push_front(stack->list, value);
+    list_push_front(stack->list, data);
 }
 
-int stack_pop(stack_t *stack, int *out_value)
+int stack_pop(stack_t *stack, void **out_data)
 {
     assert(stack != NULL);
-    return list_pop_front(stack->list, out_value);
+    return list_pop_front(stack->list, out_data);
 }
 
 int stack_is_empty(const stack_t *stack)
