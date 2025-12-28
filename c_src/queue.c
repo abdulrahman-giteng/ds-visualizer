@@ -22,18 +22,18 @@ void queue_destroy(queue_t *queue)
     free(queue);
 }
 
-void queue_enqueue(queue_t *queue, int value)
+void queue_enqueue(queue_t *queue, void *data)
 {
     assert(queue != NULL);
-    list_push_back(queue->list, value);
+    list_push_back(queue->list, data);
 }
 
-int queue_dequeue(queue_t *queue, int *out_value)
+int queue_dequeue(queue_t *queue, void **out_data)
 {
 
     assert(queue != NULL);
 
-    return list_pop_front(queue->list, out_value);
+    return list_pop_front(queue->list, out_data);
 }
 
 int queue_is_empty(const queue_t *queue)

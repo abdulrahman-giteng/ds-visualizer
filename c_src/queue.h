@@ -14,8 +14,8 @@ queue_t *queue_create(void);
 void queue_destroy(queue_t *queue);
 
 /* Queue operations */
-void queue_enqueue(queue_t *queue, int value);
-int queue_dequeue(queue_t *queue, int *out_value);
+void queue_enqueue(queue_t *queue, void *data);
+int queue_dequeue(queue_t *queue, void **out_data);
 int queue_is_empty(const queue_t *queue);
 
 #endif
