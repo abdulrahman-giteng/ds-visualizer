@@ -5,6 +5,12 @@
 *.dll
 *.so
 
+# Test binaries
+test_list
+test_stack
+test_queue
+test_*
+
 # Python cache
 __pycache__/
 *.pyc
@@ -18,5 +24,4 @@ venv/
 
 # OS files
 .DS_Store
-Thumbs.dbtest_list
-test_list
+Thumbs.db
