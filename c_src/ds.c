@@ -43,27 +43,27 @@ void list_destroy(list_t *list)
 /* =========================
    List operations
    ========================= */
-void list_push_front(list_t *list, int value)
+void list_push_front(list_t *list, void *data)
 {
     assert(list != NULL);
 
     node_t *new_node = malloc(sizeof(node_t));
     assert(new_node != NULL); // ensure memory allocation succeeded
 
-    new_node->value = value;
+    new_node->data = data;
     new_node->next = list->head;
     list->head = new_node;
     list->size++;
 }
 
-void list_push_back(list_t *list, int value)
+void list_push_back(list_t *list, void *data)
 {
     assert(list != NULL);
 
     node_t *new_node = malloc(sizeof(node_t));
     assert(new_node != NULL); // ensure memory allocation succeeded
 
-    new_node->value = value;
+    new_node->data = data;
     new_node->next = NULL;
 
     if (list->tail == NULL)
@@ -80,7 +80,7 @@ void list_push_back(list_t *list, int value)
     list->size++;
 }
 
-int list_pop_front(list_t *list, int *out_value)
+int list_pop_front(list_t *list, void **out_data)
 {
     assert(list != NULL);
 
@@ -91,9 +91,9 @@ int list_pop_front(list_t *list, int *out_value)
 
     node_t *tofree = list->head;
 
-    if (out_value != NULL)
+    if (out_data != NULL)
     {
-        *out_value = tofree->value;
+        *out_data = tofree->data;
     }
 
     list->head = tofree->next;
