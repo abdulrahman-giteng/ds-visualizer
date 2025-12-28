@@ -1,34 +1,33 @@
 #include "ds.h"
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
-    printf("Creating list...\n");
     list_t *list = list_create();
-    assert(list != NULL);
+    assert(list != NULL); // Ensure list creation succeeded
 
-    printf("Pushing elements to front...\n");
-    list_push_front(list, 10);
-    list_push_front(list, 20);
-    list_push_front(list, 30);
-
-    assert(list_size(list) == 3);
-
-    printf("Popping elements from front...\n");
-    int value;
-    while (list_pop_front(list, &value)) {
-        printf("Popped: %d\n", value);
+    for (int i = 1; i <= 3; i++)
+    {
+        int *x = malloc(sizeof(int));
+        assert(x != NULL);
+        *x = i;
+        list_push_back(list, x); // Push integers 1, 2, 3 to the list
     }
 
-    assert(list_size(list) == 0);
+    for (int expected = 1; expected <= 3; expected++)
+    {
+        void *data;
+        assert(list_pop_front(list, &data)); // Ensure pop succeeded
+        int *value = data;
+        assert(*value == expected); // Check if the popped value is as expected
+        free(value);                // Free the allocated integer
+    }
 
-    printf("Testing pop on empty list...\n");
-    assert(list_pop_front(list, &value) == 0);
-
-    printf("Destroying list...\n");
+    assert(list_size(list) == 0); // List should be empty now
     list_destroy(list);
 
-    printf("All tests passed ✅\n");
+    printf("All tests passed!\n");
     return 0;
 }

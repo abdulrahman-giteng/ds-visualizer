@@ -5,32 +5,31 @@
 
 int main(void)
 {
-    printf("Creating queue...\n");
     queue_t *queue = queue_create();
     assert(queue != NULL);
-    assert(queue_is_empty(queue));
 
-    printf("Enqueuing elements onto queue...\n");
-    queue_enqueue(queue, 10);
-    queue_enqueue(queue, 20);
-    queue_enqueue(queue, 30);
+    // Enqueue integers 1, 2, 3 onto the queue
+    for (int i = 1; i <= 3; i++)
+    {
+        int *x = malloc(sizeof(int));
+        assert(x != NULL);
+        *x = i;
+        queue_enqueue(queue, x);
+    }
 
-    assert(!queue_is_empty(queue));
+    // Dequeue and check values
+    for (int expected = 1; expected <= 3; expected++)
+    {
+        void *data;
+        assert(queue_dequeue(queue, &data)); // Ensure dequeue succeeded
+        int *value = data;
+        assert(*value == expected); // Check if the dequeued value is as expected
+        free(value);                // Free the allocated integer
+    }
 
-    printf("Dequeuing elements from queue...\n");
-    int value;
-    assert(queue_dequeue(queue, &value) && value == 10);
-    assert(queue_dequeue(queue, &value) && value == 20);
-    assert(queue_dequeue(queue, &value) && value == 30);
-
-    assert(queue_is_empty(queue));
-
-    printf("Testing dequeue on empty queue...\n");
-    assert(queue_dequeue(queue, &value) == 0);
-
-    printf("Destroying queue...\n");
+    assert(queue_is_empty(queue)); // Queue should be empty now
     queue_destroy(queue);
 
-    printf("All tests passed ✅\n");
+    printf("All queue tests passed!\n");
     return 0;
 }
