@@ -2,6 +2,10 @@
 #include <stdlib.h>   // malloc, free
 #include <assert.h>
 
+#define HT_INSERTED 1
+#define HT_UPDATED  0
+#define HT_ERROR   -1
+
 /* =========================
    Hash helper
    ========================= */
@@ -111,7 +115,7 @@ int ht_put(hashtable_t *ht, int key, void *value)
         {
             // Key found — just replace the value
             entry->value = value;
-            return 0;
+            return HT_UPDATED;
         }
     }
 
@@ -119,14 +123,14 @@ int ht_put(hashtable_t *ht, int key, void *value)
     ht_entry_t *new_entry = malloc(sizeof(ht_entry_t));
     if (new_entry == NULL)
     {
-        return 0;
+        return HT_ERROR;
     }
 
     new_entry->key = key;
     new_entry->value = value;
 
     list_push_back(bucket, new_entry);
-    return 1;
+    return HT_INSERTED;
 }
 
 void *ht_get(const hashtable_t *ht, int key)
