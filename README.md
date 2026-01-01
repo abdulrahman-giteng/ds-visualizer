@@ -88,13 +88,15 @@ The tests verify:
 All tests are run under **Valgrind** to ensure there are no memory leaks
 or invalid memory accesses.
 
+
 ## Project Structure
 
+```
 c_src/
 ├── ds.c / ds.h # Generic linked list
 ├── stack.c / stack.h # Stack implementation
 ├── queue.c / queue.h # Queue implementation
-├── hashtable.c / hashtable.h # Hash table implementation
+├── hashtable.c / hashtable.h# Hash table implementation
 ├── test_list.c
 ├── test_stack.c
 ├── test_queue.c
@@ -102,6 +104,9 @@ c_src/
 
 py_visualizer/
 └── list_visualizer.py # Linked list visualization
+```
+
+
 
 
 ## Future Work
