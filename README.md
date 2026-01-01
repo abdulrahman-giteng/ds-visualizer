@@ -1,23 +1,25 @@
 # Data Structures Visualizer
 
-This project implements core data structures in C, with the long-term goal
-of adding a Python-based visualization layer for learning and debugging.
+This project implements core data structures in C, paired with a small
+Python-based visualization layer to help reason about structure and behavior.
 
-Right now, the focus is on building **clean, correct, and well-tested**
-data structure implementations with clear ownership and memory rules.
+The primary focus is on building **clean, correct, and well-tested**
+data structure implementations with explicit ownership and memory rules.
 
 ## Overview
 
-The core of this project is a generic linked list written in C. That list
-is then reused to build higher-level data structures like stacks, queues,
-and a hash table.
+At the core of this project is a generic singly linked list written in C.
+That list is reused to build higher-level data structures such as stacks,
+queues, and a hash table.
 
 The emphasis is not just on “making it work”, but on:
+
 - predictable memory management
 - simple, readable APIs
 - behavior that is easy to reason about and test
 
-This is intended as both a learning project and a portfolio-quality codebase.
+This repository is intended as both a learning project and a
+portfolio-quality codebase demonstrating solid systems fundamentals.
 
 ## Design Philosophy
 
@@ -25,6 +27,7 @@ All containers store generic `void *` pointers and manage **only their own
 internal structure**.
 
 In practice, this means:
+
 - containers allocate and free their own nodes and metadata
 - containers **do not** allocate or free user data
 - the caller is always responsible for the lifetime of stored values
@@ -55,6 +58,19 @@ especially important in C.
   - Handles collisions correctly
   - The table owns its entries, but not the stored values
 
+## Visualization
+
+A small Python-based visualizer is included to illustrate linked list
+structure and pointer relationships.
+
+The visualizer:
+- renders nodes as boxes and pointers as arrows
+- explicitly labels `HEAD` and `NULL`
+- operates on snapshots of structure state (read-only)
+
+The visualization layer is intentionally kept simple and separate from
+the C implementations to maintain a clear separation of concerns.
+
 ## Testing
 
 Each data structure has a small, focused test file written in C:
@@ -64,7 +80,7 @@ Each data structure has a small, focused test file written in C:
 - `test_queue.c`
 - `test_hashtable.c`
 
-The tests check:
+The tests verify:
 - correct behavior
 - edge cases
 - memory safety
@@ -84,9 +100,14 @@ c_src/
 ├── test_queue.c
 ├── test_hashtable.c
 
+py_visualizer/
+└── list_visualizer.py # Linked list visualization
+
 
 ## Future Work
 
-- Python-based visualization layer
-- Additional data structures
-- Optional improvements (e.g. hash table resizing, more generic keys)
+Possible extensions (not required for correctness):
+
+- additional data structures
+- optional hash table resizing
+- more generic key support
